@@ -5,7 +5,6 @@ import type {
   PipelineState, 
   Message, 
   LLMConfig, 
-  Material,
   UserPreferences,
   Checkpoint
 } from '@/types';
@@ -63,7 +62,7 @@ const defaultPreferences: UserPreferences = {
 
 export const useAppStore = create<AppState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       // LLM配置
       llmConfig: null,
       setLLMConfig: (config) => set({ llmConfig: config }),

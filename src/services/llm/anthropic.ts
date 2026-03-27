@@ -3,6 +3,23 @@ import type { ChatOptions, ChatResponse, StreamChunk, LLMService } from './base'
 
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
 
+interface AnthropicResponse {
+  id: string;
+  type: string;
+  role: string;
+  content: Array<{
+    type: string;
+    text: string;
+  }>;
+  model: string;
+  stop_reason: string;
+  stop_sequence: string | null;
+  usage: {
+    input_tokens: number;
+    output_tokens: number;
+  };
+}
+
 export class AnthropicLLMService implements LLMService {
   private config: LLMConfig | null = null;
 
@@ -158,7 +175,7 @@ export class AnthropicLLMService implements LLMService {
     return { anthropicMessages: convertedMessages, systemMessage };
   }
 
-  private parseResponse(data: any): ChatResponse {
+  private parseResponse(data: AnthropicResponse): ChatResponse {
     const content = data.content?.[0]?.text || '';
     return {
       content,

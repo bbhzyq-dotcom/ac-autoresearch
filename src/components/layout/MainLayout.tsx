@@ -1,5 +1,5 @@
 import React from 'react';
-import { Settings, FolderOpen, Moon, Sun } from 'lucide-react';
+import { Settings, FolderOpen } from 'lucide-react';
 import { useAppStore } from '@/stores/app-store';
 
 interface MainLayoutProps {

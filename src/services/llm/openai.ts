@@ -3,6 +3,26 @@ import type { ChatOptions, ChatResponse, StreamChunk, LLMService } from './base'
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
+interface OpenAIResponse {
+  id: string;
+  object: string;
+  created: number;
+  model: string;
+  choices: Array<{
+    index: number;
+    message: {
+      role: string;
+      content: string;
+    };
+    finish_reason: string;
+  }>;
+  usage: {
+    prompt_tokens: number;
+    completion_tokens: number;
+    total_tokens: number;
+  };
+}
+
 export class OpenAILLMService implements LLMService {
   private config: LLMConfig | null = null;
 
@@ -123,7 +143,7 @@ export class OpenAILLMService implements LLMService {
     };
   }
 
-  private parseResponse(data: any): ChatResponse {
+  private parseResponse(data: OpenAIResponse): ChatResponse {
     return {
       content: data.choices?.[0]?.message?.content || '',
       usage: {

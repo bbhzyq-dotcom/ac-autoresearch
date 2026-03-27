@@ -33,9 +33,7 @@ export function ChatInterface({ skillName, mode = 'auto' }: ChatInterfaceProps) 
   const { 
     messages, 
     addMessage, 
-    clearMessages, 
     currentProject,
-    llmConfig,
   } = useAppStore();
 
   useEffect(() => {
@@ -242,7 +240,7 @@ function MessageBubble({ message }: { message: Message }) {
 async function processUserInput(
   userInput: string, 
   skillName: string, 
-  mode: string
+  _mode: string
 ): Promise<string> {
   const llm = llmFactory.getService();
   

@@ -19,7 +19,7 @@ function App() {
     setShowSettings(false);
   };
 
-  const isLLMConfigured = llmConfig && llmConfig.apiKey;
+  const isLLMConfigured = !!(llmConfig && llmConfig.apiKey);
 
   return (
     <MainLayout
